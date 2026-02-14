@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rodacerto - A Verdade Nua e Crua da Estrada
 
-## Getting Started
+**Rodacerto** é uma ferramenta open-source para motoristas (aplicativo, caminhoneiros, ou uso pessoal) calcularem se vale a pena ter carro próprio, alugar, ou usar transporte por aplicativo. O foco é desvendar os "custos invisíveis" (depreciação, manutenção, multas) e dar uma resposta financeira clara.
 
-First, run the development server:
+## 🎯 Contexto & Prompt Original (Para IAs Colaboradoras)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+> **"A matemática que o motorista não faz."**
+>
+> O objetivo do projeto é criar uma ferramenta web (PWA) extremamente simples, mobile-first, que ajude motoristas a tomarem decisões financeiras sobre veículos.
+>
+> **Problema:** Muitos motoristas olham apenas para a parcela do financiamento e o combustível, esquecendo de calcular seguro, IPVA, manutenção preventiva/corretiva, depreciação do veículo e o risco de multas.
+>
+> **Solução:** Uma calculadora passo-a-passo onde o usuário insere dados básicos (modelo do carro, km/mês, consumo) e o sistema cospe a verdade:
+> - Custo real por KM rodado.
+> - Comparativo: Carro Próprio vs. Aluguel vs. Uber.
+> - Gasolina ou Etanol (com base no preço médio do estado).
+> - Impacto das multas no orçamento anual.
+>
+> **Vibe do Projeto:**
+> - **Design:** Clean, moderno, "dark mode" por padrão (descansa a vista), botões grandes.
+> - **UX:** Poucos inputs, muitos defaults inteligentes (puxe dados médios se o usuário não souber).
+> - **Tom de Voz:** Direto, amigo, "nós contra o sistema".
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Framework:** [Next.js 15+ (App Router)](https://nextjs.org/)
+- **Linguagem:** TypeScript
+- **Estilização:** [Tailwind CSS v4](https://tailwindcss.com/)
+- **Banco de Dados & Auth:** [Supabase](https://supabase.com/)
+- **Deploy:** Vercel
 
-## Learn More
+## 🚀 Como Rodar Localmente
 
-To learn more about Next.js, take a look at the following resources:
+1. **Clone o repositório:**
+   ```bash
+   git clone https://github.com/alinessgarcia/rodacerto.git
+   cd rodacerto
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Instale as dependências:**
+   ```bash
+   npm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Configure as variáveis de ambiente:**
+   Crie um arquivo `.env.local` na raiz com suas chaves do Supabase:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=sua_url_aqui
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=sua_chave_anon_aqui
+   ```
 
-## Deploy on Vercel
+4. **Rode o servidor de desenvolvimento:**
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. **Acesse:** [http://localhost:3000](http://localhost:3000)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🗄️ Estrutura do Banco de Dados (Supabase)
+
+O projeto utiliza as seguintes tabelas principais (ver `database/schema.sql`):
+- `fuel_prices`: Histórico de preços de combustível por estado (atualizado via script Python).
+- `vehicles_base`: Tabela base de veículos (FIPE, consumo médio).
+- `user_simulations`: Simulações salvas pelos usuários.
+- `fine_statistics`: Estatísticas de multas para cálculo de risco.
+
+## 🤝 Contribuição
+
+Sinta-se à vontade para abrir Issues ou Pull Requests. O foco é manter a simplicidade para o usuário final.
